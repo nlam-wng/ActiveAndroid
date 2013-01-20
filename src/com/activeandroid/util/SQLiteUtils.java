@@ -30,6 +30,7 @@ import com.activeandroid.Cache;
 import com.activeandroid.Model;
 import com.activeandroid.TableInfo;
 import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.activeandroid.serializer.TypeSerializer;
 
 public final class SQLiteUtils {
@@ -162,7 +163,9 @@ public final class SQLiteUtils {
 			}
 
 			if (FOREIGN_KEYS_SUPPORTED && ReflectionUtils.isModel(type)) {
-				definition += " REFERENCES " + tableInfo.getTableName() + "(Id)";
+//				definition += " REFERENCES " + tableInfo.getTableName() + "(Id)";
+                // Bug fix: referencing the wrong table! - NL
+                definition += " REFERENCES " + type.getAnnotation(Table.class).name() + "(Id)";
 				definition += " ON DELETE " + column.onDelete().toString().replace("_", " ");
 				definition += " ON UPDATE " + column.onUpdate().toString().replace("_", " ");
 			}
