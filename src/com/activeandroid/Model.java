@@ -37,7 +37,7 @@ public abstract class Model {
 	//////////////////////////////////////////////////////////////////////////////////////
 
 	@Column(name = "Id")
-	private Long mId = null;
+	protected Long mId = null;
 
 	private TableInfo mTableInfo;
 
