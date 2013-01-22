@@ -32,7 +32,9 @@ public @interface Column {
 		SET_NULL, SET_DEFAULT, CASCADE, RESTRICT, NO_ACTION
 	}
 
-	public String name();
+	public static final String NULL = "[NULL]";
+	
+	public String name() default NULL;
 
 	public int length() default -1;
 
@@ -47,4 +49,5 @@ public @interface Column {
 	public boolean unique() default false;
 
 	public ConflictAction onUniqueConflict() default ConflictAction.FAIL;
+	
 }
