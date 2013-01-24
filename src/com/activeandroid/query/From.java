@@ -37,6 +37,7 @@ public final class From implements Sqlable {
 	private String mOrderBy;
 	private String mLimit;
 	private String mOffset;
+	private String mOrderByOrder;
 
 	private List<Object> mArguments;
 
@@ -47,10 +48,12 @@ public final class From implements Sqlable {
 
 		mJoins = new ArrayList<Join>();
 		mArguments = new ArrayList<Object>();
+		mOrderByOrder = "ASC";
 	}
 
 	public From as(String alias) {
 		mAlias = alias;
+        mOrderByOrder = "ASC";
 		return this;
 	}
 
@@ -113,6 +116,11 @@ public final class From implements Sqlable {
 		mOrderBy = orderBy;
 		return this;
 	}
+    public From orderBy(String orderBy, String order) {
+        mOrderBy = orderBy;
+        mOrderByOrder = order;
+        return this;
+    }
 
 	public From limit(int limit) {
 		return limit(String.valueOf(limit));
@@ -164,7 +172,7 @@ public final class From implements Sqlable {
 		}
 
 		if (mOrderBy != null) {
-			sql += "ORDER BY " + mOrderBy + " ";
+			sql += "ORDER BY " + mOrderBy + " " + mOrderByOrder + " ";
 		}
 
 		if (mLimit != null) {
