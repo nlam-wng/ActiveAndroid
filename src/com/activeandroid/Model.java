@@ -39,7 +39,7 @@ public abstract class Model {
 	@Column(name = "Id")
 	protected Long mId = null;
 
-	private TableInfo mTableInfo;
+	protected TableInfo mTableInfo;
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
